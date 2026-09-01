@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment - Colleges Past Questions</title>
+
+  <title>Payment - COE Past Questions</title>
 
   <script src="https://js.paystack.co/v1/inline.js"></script>
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f7fb;
+      background: #f2f6ff;
       text-align: center;
       padding: 40px 20px;
+      margin: 0;
     }
 
     .box {
@@ -25,36 +27,47 @@
     }
 
     h1 {
-      color: #0066cc;
+      color: #003b7a;
+    }
+
+    .selection {
+      background: #eef5ff;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: left;
+      margin: 20px 0;
     }
 
     input {
       width: 90%;
       padding: 12px;
-      margin: 10px 0;
+      margin: 8px 0;
       border: 1px solid #ccc;
       border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .price {
+      font-size: 24px;
+      font-weight: bold;
+      color: #003b7a;
+      margin: 20px;
     }
 
     button {
-      background: #0066cc;
+      background: #003b7a;
       color: white;
       border: none;
       padding: 14px 25px;
       border-radius: 8px;
       font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
-      margin-top: 15px;
+      width: 100%;
     }
 
     button:hover {
-      background: #004c99;
-    }
-
-    .price {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 20px;
+      background: #002752;
     }
   </style>
 </head>
@@ -62,24 +75,63 @@
 <body>
 
   <div class="box">
-    <h1>Colleges Past Questions</h1>
 
-    <p>Access past questions after payment.</p>
+    <h1>🔐 Payment</h1>
 
-    <div class="price">GHS 20.00</div>
+    <p>Complete payment to access your past question.</p>
 
-    <input type="text" id="name" placeholder="Enter your name">
+    <div class="selection">
+      <p><strong>College:</strong> <span id="college"></span></p>
+      <p><strong>Level:</strong> <span id="level"></span></p>
+      <p><strong>Course:</strong> <span id="course"></span></p>
+      <p><strong>Year:</strong> <span id="year"></span></p>
+    </div>
 
-    <input type="email" id="email" placeholder="Enter your email">
+    <div class="price">
+      GHS 20.00
+    </div>
 
-    <button onclick="payWithPaystack()">Pay Now</button>
+    <input
+      type="text"
+      id="name"
+      placeholder="Enter your name"
+    >
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Enter your email"
+    >
+
+    <button onclick="payWithPaystack()">
+      PAY GHS 20.00
+    </button>
+
   </div>
 
   <script>
+
+    // Display the student's selection
+    document.getElementById("college").textContent =
+      localStorage.getItem("college") || "Not selected";
+
+    document.getElementById("level").textContent =
+      localStorage.getItem("level") || "Not selected";
+
+    document.getElementById("course").textContent =
+      localStorage.getItem("course") || "Not selected";
+
+    document.getElementById("year").textContent =
+      localStorage.getItem("year") || "Not selected";
+
+
     function payWithPaystack() {
 
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
+      const name =
+        document.getElementById("name").value.trim();
+
+      const email =
+        document.getElementById("email").value.trim();
 
       if (name === "" || email === "") {
         alert("Please enter your name and email.");
@@ -87,6 +139,7 @@
       }
 
       let handler = PaystackPop.setup({
+
         key: 'pk_test_5e7d4811cc33177b79c055fe63e0c5b0a73bb993',
 
         email: email,
@@ -95,19 +148,57 @@
 
         currency: 'GHS',
 
-        callback: function(response) {
-          alert("Payment successful! Reference: " + response.reference);
+        metadata: {
+          custom_fields: [
+            {
+              display_name: "Name",
+              variable_name: "student_name",
+              value: name
+            },
+            {
+              display_name: "College",
+              variable_name: "college",
+              value: localStorage.getItem("college")
+            },
+            {
+              display_name: "Level",
+              variable_name: "level",
+              value: localStorage.getItem("level")
+            },
+            {
+              display_name: "Course",
+              variable_name: "course",
+              value: localStorage.getItem("course")
+            },
+            {
+              display_name: "Year",
+              variable_name: "year",
+              value: localStorage.getItem("year")
+            }
+          ]
+        },
 
-          window.location.href = "pastquestions.html";
+        callback: function(response) {
+
+          alert(
+            "Payment successful!\n\n" +
+            "Reference: " +
+            response.reference
+          );
+
+          // Go to the success page
+          window.location.href = "success.html";
         },
 
         onClose: function() {
           alert("Payment window closed.");
         }
+
       });
 
       handler.openIframe();
     }
+
   </script>
 
 </body>
