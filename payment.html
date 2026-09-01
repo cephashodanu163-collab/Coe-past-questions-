@@ -1,45 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Payment - College Past Questions</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - Colleges Past Questions</title>
+
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .box {
+      max-width: 450px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #0066cc;
+    }
+
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background: #0066cc;
+      color: white;
+      border: none;
+      padding: 14px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: #004c99;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 20px;
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>College of Education Past Questions</h1>
+  <div class="box">
+    <h1>Colleges Past Questions</h1>
 
-<p>Access past questions by making a payment.</p>
+    <p>Access past questions after payment.</p>
 
-<h2>Price: GH₵10</h2>
+    <div class="price">GHS 20.00</div>
 
-<button onclick="payWithPaystack()">Pay Now</button>
+    <input type="text" id="name" placeholder="Enter your name">
 
-<script src="https://js.paystack.co/v1/inline.js"></script>
+    <input type="email" id="email" placeholder="Enter your email">
 
-<script>
-function payWithPaystack() {
+    <button onclick="payWithPaystack()">Pay Now</button>
+  </div>
 
-    let handler = PaystackPop.setup({
-        key: 'YOUR_PAYSTACK_PUBLIC_KEY',
-        email: 'customer@example.com',
-        amount: 1000 * 100,
+  <script>
+    function payWithPaystack() {
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+
+      if (name === "" || email === "") {
+        alert("Please enter your name and email.");
+        return;
+      }
+
+      let handler = PaystackPop.setup({
+        key: 'pk_test_5e7d4811cc33177b79c055fe63e0c5b0a73bb993',
+
+        email: email,
+
+        amount: 2000,
+
         currency: 'GHS',
 
         callback: function(response) {
-            alert('Payment successful! Reference: ' + response.reference);
+          alert("Payment successful! Reference: " + response.reference);
 
-            window.location.href = 'questions.html';
+          window.location.href = "pastquestions.html";
         },
 
         onClose: function() {
-            alert('Payment window closed.');
+          alert("Payment window closed.");
         }
-    });
+      });
 
-    handler.openIframe();
-}
-</script>
+      handler.openIframe();
+    }
+  </script>
 
 </body>
 </html>
