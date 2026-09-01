@@ -1,121 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment - COE Past Questions</title>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f2f6ff;
-    }
-
-    header {
-      background: #003b7a;
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 30px auto;
-      padding: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    h2 {
-      color: #003b7a;
-    }
-
-    .price {
-      font-size: 28px;
-      font-weight: bold;
-      margin: 20px 0;
-    }
-
-    button {
-      background: #003b7a;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 8px;
-      font-size: 17px;
-      cursor: pointer;
-    }
-
-    .note {
-      margin-top: 20px;
-      background: #fff3cd;
-      padding: 15px;
-      border-radius: 8px;
-    }
-
-    footer {
-      background: #003b7a;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      color: white;
-    }
-  </style>
+    <title>Payment - College Past Questions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
-<header>
-  <h1>COE PAST QUESTIONS</h1>
-  <p>Secure Payment</p>
-</header>
+<h1>College of Education Past Questions</h1>
 
-<div class="container">
+<p>Access past questions by making a payment.</p>
 
-  <div class="card">
+<h2>Price: GH₵10</h2>
 
-    <h2>🔐 Payment Required</h2>
+<button onclick="payWithPaystack()">Pay Now</button>
 
-    <p>
-      Make payment to access and download your selected
-      past question.
-    </p>
-
-    <div class="price">
-      GH₵ 10
-    </div>
-
-    <button onclick="startPayment()">
-      PAY NOW
-    </button>
-
-    <div class="note">
-      <strong>Important:</strong>
-      <p>
-        Your past question will become available after
-        successful payment.
-      </p>
-    </div>
-
-  </div>
-
-</div>
-
-<footer>
-  <p>© 2026 COE Past Questions</p>
-</footer>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 
 <script>
-function startPayment() {
-  alert("Payment system will be connected here.");
+function payWithPaystack() {
+
+    let handler = PaystackPop.setup({
+        key: 'YOUR_PAYSTACK_PUBLIC_KEY',
+        email: 'customer@example.com',
+        amount: 1000 * 100,
+        currency: 'GHS',
+
+        callback: function(response) {
+            alert('Payment successful! Reference: ' + response.reference);
+
+            window.location.href = 'questions.html';
+        },
+
+        onClose: function() {
+            alert('Payment window closed.');
+        }
+    });
+
+    handler.openIframe();
 }
 </script>
 
