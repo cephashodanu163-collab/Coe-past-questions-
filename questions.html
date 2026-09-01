@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Past Questions - COE</title>
 
   <style>
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -73,6 +80,20 @@
       background: #002752;
     }
 
+    .warning {
+      background: #fff4d6;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .locked {
+      background: #ffe6e6;
+      padding: 15px;
+      border-radius: 10px;
+      color: #8a0000;
+    }
+
     footer {
       background: #003b7a;
       color: white;
@@ -80,63 +101,115 @@
       padding: 20px;
       margin-top: 30px;
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <header>
-    <h1>📚 COE Past Questions</h1>
-    <p>Your selected past questions</p>
-  </header>
 
-  <div class="container">
+<header>
 
-    <div class="box">
+  <h1>📚 COE Past Questions</h1>
 
-      <h2>Student Selection</h2>
+  <p>Your selected past question</p>
 
-      <div class="details">
-        <strong>College:</strong>
-        <span id="college"></span>
-        <br>
+</header>
 
-        <strong>Level:</strong>
-        <span id="level"></span>
-        <br>
 
-        <strong>Course:</strong>
-        <span id="course"></span>
-        <br>
+<div class="container">
 
-        <strong>Year:</strong>
-        <span id="year"></span>
-      </div>
+
+  <!-- STUDENT SELECTION -->
+
+  <div class="box">
+
+    <h2>Student Selection</h2>
+
+    <div class="details">
+
+      <strong>College:</strong>
+      <span id="college"></span>
+
+      <br>
+
+      <strong>Level:</strong>
+      <span id="level"></span>
+
+      <br>
+
+      <strong>Course:</strong>
+      <span id="course"></span>
+
+      <br>
+
+      <strong>Year:</strong>
+      <span id="year"></span>
 
     </div>
 
-    <div class="box">
+  </div>
 
-      <h2>📄 Available Past Questions</h2>
 
-      <div class="question">
+  <!-- PAYMENT CHECK -->
 
-        <h3 id="questionTitle">
-          Past Question
-        </h3>
+  <div class="box" id="paymentBox">
 
-        <p>
-          Your past question is ready.
-          Tap the button below to download it.
-        </p>
+    <h2>🔐 Payment Status</h2>
 
-        <a
-          class="download"
-          href="#"
-          onclick="downloadQuestion()"
-        >
-          ⬇️ DOWNLOAD PAST QUESTION
-        </a>
+    <div id="paymentMessage"></div>
+
+  </div>
+
+
+  <!-- QUESTION -->
+
+  <div
+    class="box"
+    id="questionBox"
+    style="display:none;"
+  >
+
+    <h2>📄 Available Past Question</h2>
+
+    <div class="question">
+
+      <h3 id="questionTitle">
+        Past Question
+      </h3>
+
+      <p>
+
+        Your payment has been completed.
+
+        Your selected past question is ready.
+
+      </p>
+
+
+      <!--
+        REPLACE THE "#" BELOW WITH
+        THE LINK TO YOUR ACTUAL PDF
+      -->
+
+      <a
+        id="downloadButton"
+        class="download"
+        href="#"
+        target="_blank"
+      >
+
+        ⬇️ DOWNLOAD PAST QUESTION
+
+      </a>
+
+
+      <div class="warning">
+
+        📌 The download file will be connected
+        after you upload the actual past-question PDF.
 
       </div>
 
@@ -144,53 +217,124 @@
 
   </div>
 
-  <footer>
-    <p>© 2026 COE Past Questions</p>
-    <p>Quality Past Questions for Every College of Education Student</p>
-  </footer>
+
+</div>
 
 
-  <script>
+<footer>
 
-    const college =
-      localStorage.getItem("college");
+  <p>© 2026 COE Past Questions</p>
 
-    const level =
-      localStorage.getItem("level");
+  <p>
+    Quality Past Questions for Every
+    College of Education Student
+  </p>
 
-    const course =
-      localStorage.getItem("course");
-
-    const year =
-      localStorage.getItem("year");
+</footer>
 
 
-    document.getElementById("college").textContent =
-      college || "Not selected";
-
-    document.getElementById("level").textContent =
-      level || "Not selected";
-
-    document.getElementById("course").textContent =
-      course || "Not selected";
-
-    document.getElementById("year").textContent =
-      year || "Not selected";
+<script>
 
 
-    document.getElementById("questionTitle").textContent =
-      course + " - " + year + " Past Question";
+  /*
+    GET STUDENT INFORMATION
+  */
+
+  const college =
+    localStorage.getItem("college");
+
+  const level =
+    localStorage.getItem("level");
+
+  const course =
+    localStorage.getItem("course");
+
+  const year =
+    localStorage.getItem("year");
 
 
-    function downloadQuestion() {
+  /*
+    DISPLAY STUDENT INFORMATION
+  */
 
-      alert(
-        "The past-question file will be added here once it has been uploaded."
-      );
+  document.getElementById("college").textContent =
+    college || "Not selected";
 
-    }
+  document.getElementById("level").textContent =
+    level || "Not selected";
 
-  </script>
+  document.getElementById("course").textContent =
+    course || "Not selected";
+
+  document.getElementById("year").textContent =
+    year || "Not selected";
+
+
+  /*
+    QUESTION TITLE
+  */
+
+  document.getElementById("questionTitle").textContent =
+    (course || "Course") +
+    " - " +
+    (year || "Year") +
+    " Past Question";
+
+
+  /*
+    CHECK PAYMENT
+  */
+
+  const paymentSuccessful =
+    localStorage.getItem("paymentSuccessful");
+
+
+  if (paymentSuccessful === "true") {
+
+
+    document.getElementById(
+      "paymentMessage"
+    ).innerHTML =
+
+      "<div style='background:#e6f7e6;padding:15px;border-radius:10px;'>" +
+
+      "✅ <strong>Payment Successful</strong>" +
+
+      "<br><br>" +
+
+      "You can now access your selected past question." +
+
+      "</div>";
+
+
+    document.getElementById(
+      "questionBox"
+    ).style.display = "block";
+
+
+  } else {
+
+
+    document.getElementById(
+      "paymentMessage"
+    ).innerHTML =
+
+      "<div class='locked'>" +
+
+      "🔒 <strong>Past Question Locked</strong>" +
+
+      "<br><br>" +
+
+      "Please complete payment before accessing this question." +
+
+      "</div>";
+
+  }
+
+
+</script>
+
 
 </body>
+
 </html>
