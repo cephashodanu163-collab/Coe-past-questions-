@@ -4,199 +4,294 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Payment - COE Past Questions</title>
+  <title>Payment | Colleges Past Questions</title>
 
+  <!-- Paystack -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f6ff;
-      text-align: center;
-      padding: 40px 20px;
-      margin: 0;
+    * {
+      box-sizing: border-box;
     }
 
-    .box {
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5ff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .payment-box {
+      width: 100%;
       max-width: 450px;
-      margin: auto;
       background: white;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 40px;
+      margin-bottom: 5px;
     }
 
     h1 {
-      color: #003b7a;
+      text-align: center;
+      color: #0757c9;
+      margin-bottom: 8px;
+      font-size: 25px;
     }
 
-    .selection {
-      background: #eef5ff;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: left;
-      margin: 20px 0;
+    .description {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
     }
 
-    input {
-      width: 90%;
-      padding: 12px;
-      margin: 8px 0;
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 15px;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #0757c9;
     }
 
     .price {
-      font-size: 24px;
+      background: #eef4ff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 20px;
       font-weight: bold;
-      color: #003b7a;
-      margin: 20px;
+      color: #0757c9;
     }
 
     button {
-      background: #003b7a;
-      color: white;
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
       border: none;
-      padding: 14px 25px;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 9px;
+      background: #0757c9;
+      color: white;
+      font-size: 17px;
       font-weight: bold;
       cursor: pointer;
-      width: 100%;
     }
 
     button:hover {
-      background: #002752;
+      background: #03449e;
+    }
+
+    .secure {
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      margin-top: 18px;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #0757c9;
+      text-decoration: none;
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="box">
+  <div class="payment-box">
 
-    <h1>🔐 Payment</h1>
+    <div class="logo">📚</div>
 
-    <p>Complete payment to access your past question.</p>
+    <h1>Past Questions Payment</h1>
 
-    <div class="selection">
-      <p><strong>College:</strong> <span id="college"></span></p>
-      <p><strong>Level:</strong> <span id="level"></span></p>
-      <p><strong>Course:</strong> <span id="course"></span></p>
-      <p><strong>Year:</strong> <span id="year"></span></p>
-    </div>
+    <p class="description">
+      Complete your payment to access Colleges of Education past questions.
+    </p>
 
-    <div class="price">
-      GHS 20.00
-    </div>
-
+    <label for="name">Full Name</label>
     <input
       type="text"
       id="name"
-      placeholder="Enter your name"
+      placeholder="Enter your full name"
     >
 
+    <label for="email">Email Address</label>
     <input
       type="email"
       id="email"
-      placeholder="Enter your email"
+      placeholder="Enter your email address"
     >
 
+    <label for="college">College</label>
+    <input
+      type="text"
+      id="college"
+      placeholder="Enter your college name"
+    >
+
+    <label for="level">Select Level</label>
+
+    <select id="level">
+      <option value="">Select Level</option>
+      <option value="Level 100">Level 100</option>
+      <option value="Level 200">Level 200</option>
+      <option value="Level 300">Level 300</option>
+      <option value="Level 400">Level 400</option>
+    </select>
+
+    <div class="price">
+      Amount: GH₵20.00
+    </div>
+
     <button onclick="payWithPaystack()">
-      PAY GHS 20.00
+      🔒 Pay Now
     </button>
+
+    <p class="secure">
+      Secure payment powered by Paystack
+    </p>
+
+    <a href="index.html" class="back">
+      ← Back to Home
+    </a>
 
   </div>
 
+
   <script>
-
-    // Display the student's selection
-    document.getElementById("college").textContent =
-      localStorage.getItem("college") || "Not selected";
-
-    document.getElementById("level").textContent =
-      localStorage.getItem("level") || "Not selected";
-
-    document.getElementById("course").textContent =
-      localStorage.getItem("course") || "Not selected";
-
-    document.getElementById("year").textContent =
-      localStorage.getItem("year") || "Not selected";
-
 
     function payWithPaystack() {
 
-      const name =
-        document.getElementById("name").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const college = document.getElementById("college").value.trim();
+      const level = document.getElementById("level").value;
 
-      const email =
-        document.getElementById("email").value.trim();
+      /* Check information */
 
-      if (name === "" || email === "") {
-        alert("Please enter your name and email.");
+      if (name === "") {
+        alert("Please enter your full name.");
         return;
       }
 
-      let handler = PaystackPop.setup({
+      if (email === "") {
+        alert("Please enter your email address.");
+        return;
+      }
 
-        key: 'pk_test_5e7d4811cc33177b79c055fe63e0c5b0a73bb993',
+      if (college === "") {
+        alert("Please enter your college name.");
+        return;
+      }
+
+      if (level === "") {
+        alert("Please select your level.");
+        return;
+      }
+
+
+      /* Paystack payment */
+
+      const handler = PaystackPop.setup({
+
+        key: "pk_test_5e7d4811cc33177b79c055fe63e0c5b0a73bb993",
 
         email: email,
 
         amount: 2000,
 
-        currency: 'GHS',
+        currency: "GHS",
+
+        ref:
+          "PASTQ_" +
+          Date.now() +
+          "_" +
+          Math.floor(Math.random() * 1000),
 
         metadata: {
+
           custom_fields: [
+
             {
-              display_name: "Name",
-              variable_name: "student_name",
+              display_name: "Full Name",
+              variable_name: "full_name",
               value: name
             },
+
             {
               display_name: "College",
               variable_name: "college",
-              value: localStorage.getItem("college")
+              value: college
             },
+
             {
               display_name: "Level",
               variable_name: "level",
-              value: localStorage.getItem("level")
-            },
-            {
-              display_name: "Course",
-              variable_name: "course",
-              value: localStorage.getItem("course")
-            },
-            {
-              display_name: "Year",
-              variable_name: "year",
-              value: localStorage.getItem("year")
+              value: level
             }
+
           ]
+
         },
+
 
         callback: function(response) {
 
           alert(
             "Payment successful!\n\n" +
-            "Reference: " +
+            "Payment Reference: " +
             response.reference
           );
 
-          // Go to the success page
-          window.location.href = "success.html";
+          /*
+            Temporary redirect after payment.
+
+            We will replace this with a proper
+            secure verification system later.
+          */
+
+          window.location.href = "past-questions.html";
+
         },
 
+
         onClose: function() {
-          alert("Payment window closed.");
+
+          alert("Payment window was closed.");
+
         }
 
       });
 
+
       handler.openIframe();
+
     }
 
   </script>
