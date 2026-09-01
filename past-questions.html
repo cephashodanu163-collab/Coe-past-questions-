@@ -3,227 +3,288 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>COE Past Questions</title>
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
       background: #f2f6ff;
-      color: #222;
-    }
-
-    header {
-      background: #003b7a;
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-    }
-
-    header h1 {
       margin: 0;
-      font-size: 30px;
+      padding: 20px;
     }
 
-    header p {
-      margin-top: 10px;
+    h1 {
+      text-align: center;
+      color: #0645ad;
     }
 
     .container {
-      padding: 20px;
-      max-width: 700px;
+      max-width: 550px;
       margin: auto;
     }
 
     .box {
       background: white;
       padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      margin: 20px 0;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
     }
 
-    .box h2 {
-      color: #003b7a;
-      margin-top: 0;
+    h2 {
+      color: #0645ad;
+      font-size: 20px;
     }
 
     select {
       width: 100%;
-      padding: 13px;
+      padding: 14px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 16px;
-      background: white;
     }
 
-    .question {
-      background: #eef5ff;
+    button {
+      width: 100%;
       padding: 15px;
+      margin-top: 15px;
+      border: none;
       border-radius: 8px;
-      margin-bottom: 15px;
+      background: #0645ad;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
     }
 
     .payment {
       background: #fff4d6;
       padding: 15px;
       border-radius: 8px;
-      margin-bottom: 15px;
+      margin-top: 15px;
     }
 
-    button {
-      width: 100%;
+    .success {
+      background: #e6f7e6;
       padding: 15px;
-      background: #003b7a;
-      color: white;
-      border: none;
       border-radius: 8px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #002752;
+      margin-top: 15px;
+      display: none;
     }
 
     footer {
-      background: #003b7a;
-      color: white;
       text-align: center;
-      padding: 20px;
       margin-top: 30px;
+      color: #555;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>COE Past Questions</h1>
-    <p>Past Questions for Colleges of Education Students</p>
-  </header>
+<div class="container">
 
-  <div class="container">
+  <h1>📚 COE Past Questions</h1>
 
-    <div class="box">
-      <h2>🏫 Select College</h2>
+  <div class="box">
+    <h2>🏫 Select College</h2>
 
-      <select>
-        <option>Select College</option>
-        <option>Presbyterian College of Education</option>
-        <option>Accra College of Education</option>
-        <option>Abetifi Presbyterian College of Education</option>
-        <option>Akrokerri College of Education</option>
-        <option>Bagabaga College of Education</option>
-        <option>Other Colleges</option>
-      </select>
+    <select id="college">
+      <option>Select College</option>
+      <option>Presbyterian College of Education</option>
+      <option>Accra College of Education</option>
+      <option>Abetifi Presbyterian College of Education</option>
+      <option>Akrokerri College of Education</option>
+      <option>Bagabaga College of Education</option>
+      <option>Enchi College of Education</option>
+      <option>Foso College of Education</option>
+      <option>Other College of Education</option>
+    </select>
+  </div>
+
+  <div class="box">
+    <h2>🎓 Select Level</h2>
+
+    <select id="level">
+      <option>Select Level</option>
+      <option>Level 100</option>
+      <option>Level 200</option>
+      <option>Level 300</option>
+      <option>Level 400</option>
+    </select>
+  </div>
+
+  <div class="box">
+    <h2>📚 Select Course</h2>
+
+    <select id="course">
+      <option>Select Course</option>
+      <option>Mathematics</option>
+      <option>English Language</option>
+      <option>Science</option>
+      <option>Social Studies</option>
+      <option>ICT</option>
+      <option>Education Studies</option>
+      <option>Other Courses</option>
+    </select>
+  </div>
+
+  <div class="box">
+    <h2>📅 Select Year</h2>
+
+    <select id="year">
+      <option>Select Year</option>
+      <option>2021</option>
+      <option>2022</option>
+      <option>2023</option>
+      <option>2024</option>
+      <option>2025</option>
+      <option>2026</option>
+    </select>
+  </div>
+
+  <div class="box">
+
+    <h2>📄 Past Questions</h2>
+
+    <p>
+      Select your college, level, course and year.
+    </p>
+
+    <div class="payment">
+      🔐 <strong>Payment Required</strong>
+      <p>
+        Payment is required before accessing the selected
+        past question.
+      </p>
     </div>
 
-    <div class="box">
-      <h2>🎓 Select Level</h2>
+    <button id="paymentButton" onclick="showSelection()">
+      CONTINUE TO PAYMENT
+    </button>
 
-      <select>
-        <option>Select Level</option>
-        <option>Level 100</option>
-        <option>Level 200</option>
-        <option>Level 300</option>
-        <option>Level 400</option>
-      </select>
-    </div>
+    <div class="success" id="successBox">
+      <strong>✅ Payment Completed</strong>
 
-    <div class="box">
-      <h2>📚 Select Course</h2>
+      <p>
+        Your selected past question is ready.
+      </p>
 
-      <select>
-        <option>Select Course</option>
-        <option>Mathematics</option>
-        <option>English Language</option>
-        <option>Science</option>
-        <option>Social Studies</option>
-        <option>ICT</option>
-        <option>Education Studies</option>
-        <option>Other Courses</option>
-      </select>
-    </div>
+      <p id="selectedQuestion"></p>
 
-    <div class="box">
-      <h2>📅 Select Year</h2>
-
-      <select>
-        <option>Select Year</option>
-        <option>2021</option>
-        <option>2022</option>
-        <option>2023</option>
-        <option>2024</option>
-        <option>2025</option>
-        <option>2026</option>
-      </select>
-    </div>
-
-    <div class="box">
-      <h2>📄 Past Questions</h2>
-
-      <div class="question">
-        <strong>Past Questions 2021–2026</strong>
-        <p>
-          Select your college, level, course and year to continue.
-        </p>
-      </div>
-
-      <div class="payment">
-        <strong>🔐 Payment Required</strong>
-        <p>
-          Payment is required before you can access or download
-          the selected past question.
-        </p>
-      </div>
-
-      <button onclick="showSelection()">
-        CONTINUE TO PAYMENT
+      <button onclick="accessQuestions()">
+        📄 ACCESS PAST QUESTION
       </button>
     </div>
 
   </div>
 
-  <footer>
-    <p>© 2026 COE Past Questions</p>
-    <p>Quality Past Questions for Every College of Education Student</p>
-  </footer>
+</div>
 
-  <script>
-    function showSelection() {
+<footer>
+  <p>© 2026 COE Past Questions</p>
+  <p>Quality Past Questions for Every College of Education Student</p>
+</footer>
 
-      const selects = document.querySelectorAll("select");
 
-      const college = selects[0].value;
-      const level = selects[1].value;
-      const course = selects[2].value;
-      const year = selects[3].value;
+<script>
 
-      if (
-        college === "Select College" ||
-        level === "Select Level" ||
-        course === "Select Course" ||
-        year === "Select Year"
-      ) {
-        alert(
-          "Please select your College, Level, Course and Year."
-        );
-        return;
-      }
+function showSelection() {
 
-      // Save the student's selection
-      localStorage.setItem("college", college);
-      localStorage.setItem("level", level);
-      localStorage.setItem("course", course);
-      localStorage.setItem("year", year);
+  const college = document.getElementById("college").value;
+  const level = document.getElementById("level").value;
+  const course = document.getElementById("course").value;
+  const year = document.getElementById("year").value;
 
-      // Send the student to the payment page
-      window.location.href = "payment.html";
-    }
-  </script>
+  if (
+    college === "Select College" ||
+    level === "Select Level" ||
+    course === "Select Course" ||
+    year === "Select Year"
+  ) {
+
+    alert(
+      "Please select your College, Level, Course and Year."
+    );
+
+    return;
+  }
+
+  localStorage.setItem("college", college);
+  localStorage.setItem("level", level);
+  localStorage.setItem("course", course);
+  localStorage.setItem("year", year);
+
+  window.location.href = "payment.html";
+}
+
+
+function checkPayment() {
+
+  const paymentSuccessful =
+    localStorage.getItem("paymentSuccessful");
+
+  if (paymentSuccessful === "true") {
+
+    document.getElementById("paymentButton").style.display =
+      "none";
+
+    document.getElementById("successBox").style.display =
+      "block";
+
+    const college =
+      localStorage.getItem("college");
+
+    const level =
+      localStorage.getItem("level");
+
+    const course =
+      localStorage.getItem("course");
+
+    const year =
+      localStorage.getItem("year");
+
+    document.getElementById("selectedQuestion").innerHTML =
+      "<strong>" +
+      college +
+      "</strong><br>" +
+      level +
+      "<br>" +
+      course +
+      "<br>" +
+      year;
+  }
+}
+
+
+function accessQuestions() {
+
+  const college =
+    localStorage.getItem("college");
+
+  const level =
+    localStorage.getItem("level");
+
+  const course =
+    localStorage.getItem("course");
+
+  const year =
+    localStorage.getItem("year");
+
+  alert(
+    "Past Question Selected:\n\n" +
+    college + "\n" +
+    level + "\n" +
+    course + "\n" +
+    year +
+    "\n\nThe download file will be connected next."
+  );
+
+}
+
+
+checkPayment();
+
+</script>
 
 </body>
 </html>
