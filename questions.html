@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Past Questions - COE</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f2f6ff;
+      color: #222;
+    }
+
+    header {
+      background: #003b7a;
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .details {
+      background: #eef5ff;
+      padding: 15px;
+      border-radius: 10px;
+      line-height: 1.8;
+    }
+
+    .question {
+      border: 1px solid #ddd;
+      padding: 18px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .question h3 {
+      color: #003b7a;
+      margin-top: 0;
+    }
+
+    .download {
+      display: inline-block;
+      background: #003b7a;
+      color: white;
+      text-decoration: none;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .download:hover {
+      background: #002752;
+    }
+
+    footer {
+      background: #003b7a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>📚 COE Past Questions</h1>
+    <p>Your selected past questions</p>
+  </header>
+
+  <div class="container">
+
+    <div class="box">
+
+      <h2>Student Selection</h2>
+
+      <div class="details">
+        <strong>College:</strong>
+        <span id="college"></span>
+        <br>
+
+        <strong>Level:</strong>
+        <span id="level"></span>
+        <br>
+
+        <strong>Course:</strong>
+        <span id="course"></span>
+        <br>
+
+        <strong>Year:</strong>
+        <span id="year"></span>
+      </div>
+
+    </div>
+
+    <div class="box">
+
+      <h2>📄 Available Past Questions</h2>
+
+      <div class="question">
+
+        <h3 id="questionTitle">
+          Past Question
+        </h3>
+
+        <p>
+          Your past question is ready.
+          Tap the button below to download it.
+        </p>
+
+        <a
+          class="download"
+          href="#"
+          onclick="downloadQuestion()"
+        >
+          ⬇️ DOWNLOAD PAST QUESTION
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 COE Past Questions</p>
+    <p>Quality Past Questions for Every College of Education Student</p>
+  </footer>
+
+
+  <script>
+
+    const college =
+      localStorage.getItem("college");
+
+    const level =
+      localStorage.getItem("level");
+
+    const course =
+      localStorage.getItem("course");
+
+    const year =
+      localStorage.getItem("year");
+
+
+    document.getElementById("college").textContent =
+      college || "Not selected";
+
+    document.getElementById("level").textContent =
+      level || "Not selected";
+
+    document.getElementById("course").textContent =
+      course || "Not selected";
+
+    document.getElementById("year").textContent =
+      year || "Not selected";
+
+
+    document.getElementById("questionTitle").textContent =
+      course + " - " + year + " Past Question";
+
+
+    function downloadQuestion() {
+
+      alert(
+        "The past-question file will be added here once it has been uploaded."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
