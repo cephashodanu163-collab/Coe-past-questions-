@@ -159,6 +159,7 @@
           the selected past question.
         </p>
       </div>
+      <button onclick="showSelection()">CONTINUE TO PAYMENT</button>
     </div>
 
   </div>
@@ -167,6 +168,32 @@
     <p>© 2026 COE Past Questions</p>
     <p>Quality Past Questions for Every College of Education Student</p>
   </footer>
+  <script>
+function showSelection() {
+  const college = document.querySelectorAll("select")[0].value;
+  const level = document.querySelectorAll("select")[1].value;
+  const course = document.querySelectorAll("select")[2].value;
+  const year = document.querySelectorAll("select")[3].value;
+
+  if (
+    college === "Select College" ||
+    level === "Select Level" ||
+    course === "Select Course" ||
+    year === "Select Year"
+  ) {
+    alert("Please select your College, Level, Course and Year.");
+    return;
+  }
+
+  alert(
+    "You selected:\n\n" +
+    college + "\n" +
+    level + "\n" +
+    course + "\n" +
+    year
+  );
+}
+  </script>
 
 </body>
 </html>
