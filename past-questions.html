@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>COE Past Questions</title>
 
   <style>
@@ -38,37 +39,53 @@
     .box {
       background: white;
       padding: 20px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     }
 
-    h2 {
+    .box h2 {
       color: #003b7a;
+      margin-top: 0;
     }
 
     select {
       width: 100%;
       padding: 13px;
-      margin-top: 8px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 16px;
+      background: white;
     }
 
     .question {
-      background: #e8f1ff;
+      background: #eef5ff;
       padding: 15px;
       border-radius: 8px;
-      margin-top: 15px;
+      margin-bottom: 15px;
     }
 
     .payment {
-      background: #fff3cd;
-      border-left: 5px solid #ffb300;
+      background: #fff4d6;
       padding: 15px;
-      margin-top: 20px;
       border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: #003b7a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #002752;
     }
 
     footer {
@@ -84,8 +101,8 @@
 <body>
 
   <header>
-    <h1>COE PAST QUESTIONS</h1>
-    <p>Past Questions for Colleges of Education in Ghana</p>
+    <h1>COE Past Questions</h1>
+    <p>Past Questions for Colleges of Education Students</p>
   </header>
 
   <div class="container">
@@ -97,9 +114,10 @@
         <option>Select College</option>
         <option>Presbyterian College of Education</option>
         <option>Accra College of Education</option>
-        <option>Komenda College of Education</option>
-        <option>Foso College of Education</option>
-        <option>Other Colleges of Education</option>
+        <option>Abetifi Presbyterian College of Education</option>
+        <option>Akrokerri College of Education</option>
+        <option>Bagabaga College of Education</option>
+        <option>Other Colleges</option>
       </select>
     </div>
 
@@ -148,18 +166,23 @@
       <h2>📄 Past Questions</h2>
 
       <div class="question">
-        <strong>Past Question 2026</strong>
-        <p>Choose your college, level and course to access past questions.</p>
+        <strong>Past Questions 2021–2026</strong>
+        <p>
+          Select your college, level, course and year to continue.
+        </p>
       </div>
 
       <div class="payment">
         <strong>🔐 Payment Required</strong>
         <p>
-          Payment will be required before accessing or downloading
+          Payment is required before you can access or download
           the selected past question.
         </p>
       </div>
-      <button onclick="showSelection()">CONTINUE TO PAYMENT</button>
+
+      <button onclick="showSelection()">
+        CONTINUE TO PAYMENT
+      </button>
     </div>
 
   </div>
@@ -168,31 +191,38 @@
     <p>© 2026 COE Past Questions</p>
     <p>Quality Past Questions for Every College of Education Student</p>
   </footer>
+
   <script>
-function showSelection() {
-  const college = document.querySelectorAll("select")[0].value;
-  const level = document.querySelectorAll("select")[1].value;
-  const course = document.querySelectorAll("select")[2].value;
-  const year = document.querySelectorAll("select")[3].value;
+    function showSelection() {
 
-  if (
-    college === "Select College" ||
-    level === "Select Level" ||
-    course === "Select Course" ||
-    year === "Select Year"
-  ) {
-    alert("Please select your College, Level, Course and Year.");
-    return;
-  }
+      const selects = document.querySelectorAll("select");
 
-  alert(
-    "You selected:\n\n" +
-    college + "\n" +
-    level + "\n" +
-    course + "\n" +
-    year
-  );
-}
+      const college = selects[0].value;
+      const level = selects[1].value;
+      const course = selects[2].value;
+      const year = selects[3].value;
+
+      if (
+        college === "Select College" ||
+        level === "Select Level" ||
+        course === "Select Course" ||
+        year === "Select Year"
+      ) {
+        alert(
+          "Please select your College, Level, Course and Year."
+        );
+        return;
+      }
+
+      // Save the student's selection
+      localStorage.setItem("college", college);
+      localStorage.setItem("level", level);
+      localStorage.setItem("course", course);
+      localStorage.setItem("year", year);
+
+      // Send the student to the payment page
+      window.location.href = "payment.html";
+    }
   </script>
 
 </body>
