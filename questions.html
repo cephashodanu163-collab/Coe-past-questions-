@@ -3,216 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>College Past Questions</title>
+  <title>Past Questions</title>
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f2f6ff;
+      background: #f2f7ff;
       margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background: #003366;
-      color: white;
+      padding: 20px;
       text-align: center;
-      padding: 20px;
     }
 
-    .container {
-      max-width: 700px;
-      margin: 25px auto;
-      padding: 20px;
+    h1 {
+      color: #123c69;
     }
 
-    .box {
-      background: white;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    }
-
-    select,
-    button {
-      width: 100%;
+    select, button {
+      width: 90%;
+      max-width: 400px;
       padding: 14px;
-      margin-top: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      margin: 10px;
       font-size: 16px;
-      box-sizing: border-box;
+      border-radius: 8px;
+      border: 1px solid #aaa;
     }
 
     button {
-      background: #003366;
+      background: #123c69;
       color: white;
       border: none;
-      cursor: pointer;
     }
 
-    #questionArea {
-      display: none;
+    #result {
+      margin-top: 25px;
+      padding: 20px;
     }
 
-    .question {
-      padding: 15px;
-      margin-top: 15px;
-      background: #eef4ff;
-      border-radius: 8px;
-    }
-
-    .pdf-button {
-      display: block;
-      text-align: center;
-      background: #003366;
+    a {
+      display: inline-block;
+      padding: 15px 20px;
+      background: #198754;
       color: white;
-      padding: 15px;
-      border-radius: 8px;
       text-decoration: none;
-      font-weight: bold;
+      border-radius: 8px;
       margin-top: 15px;
-    }
-
-    .pdf-button:hover {
-      background: #0055aa;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>College Past Questions</h1>
-  <p>Past Questions for Colleges of Education in Ghana</p>
-</header>
+  <h1>📚 Colleges Past Questions</h1>
 
-<div class="container">
+  <select id="college">
+    <option value="">Select College</option>
+    <option>Presbyterian College of Education</option>
+    <option>Komenda College of Education</option>
+    <option>Accra College of Education</option>
+    <option>OLA College of Education</option>
+    <option>Foso College of Education</option>
+    <option>Other College</option>
+  </select>
 
-  <div class="box">
+  <select id="level">
+    <option value="">Select Level</option>
+    <option>Level 100</option>
+    <option>Level 200</option>
+    <option>Level 300</option>
+    <option>Level 400</option>
+  </select>
 
-    <h2>Select Your Details</h2>
+  <select id="course">
+    <option value="">Select Course</option>
+    <option>African Studies</option>
+    <option>English Language</option>
+    <option>Mathematics</option>
+    <option>Science</option>
+    <option>Social Studies</option>
+    <option>ICT</option>
+    <option>Education</option>
+  </select>
 
-    <select id="college">
-      <option value="">Select College</option>
-      <option>Presbyterian College of Education</option>
-      <option>Komenda College of Education</option>
-      <option>Accra College of Education</option>
-      <option>OLA College of Education</option>
-      <option>Foso College of Education</option>
-      <option>Other College</option>
-    </select>
+  <br>
 
-    <select id="level">
-      <option value="">Select Level</option>
-      <option>Level 100</option>
-      <option>Level 200</option>
-      <option>Level 300</option>
-      <option>Level 400</option>
-    </select>
+  <button onclick="loadQuestions()">View Past Questions</button>
 
-    <select id="course">
-      <option value="">Select Course</option>
-      <option>African Studies</option>
-      <option>English Language</option>
-      <option>Mathematics</option>
-      <option>Science</option>
-      <option>Social Studies</option>
-      <option>ICT</option>
-      <option>Education</option>
-    </select>
+  <div id="result"></div>
 
-    <button onclick="loadQuestions()">
-      View Past Questions
-    </button>
+  <script>
+    function loadQuestions() {
 
-  </div>
+      const course = document.getElementById("course").value;
+      const result = document.getElementById("result");
 
-  <div class="box" id="questionArea">
+      if (course === "") {
+        result.innerHTML = "<p>Please select a course first.</p>";
+        return;
+      }
 
-    <h2>Past Questions</h2>
+      if (course === "African Studies") {
 
-    <div id="questions"></div>
+        result.innerHTML = `
+          <h2>African Studies Past Questions</h2>
 
-  </div>
+          <p>Your past question is ready.</p>
 
-</div>
+          <a href="https://drive.google.com/file/d/1hR5t5LXIj6X1WG8ckGt0iOy8YRgMIXG4/view"
+             target="_blank">
+             📄 Open African Studies Past Questions
+          </a>
+        `;
 
-<script>
+      } else {
 
-function loadQuestions() {
-
-  const college = document.getElementById("college").value;
-  const level = document.getElementById("level").value;
-  const course = document.getElementById("course").value;
-
-  if (college === "" || level === "" || course === "") {
-    alert("Please select your College, Level and Course.");
-    return;
-  }
-
-  document.getElementById("questionArea").style.display = "block";
-
-  if (course === "African Studies") {
-
-    document.getElementById("questions").innerHTML = `
-
-      <div class="question">
-
-        <h3>African Studies Past Question</h3>
-
-        <p>
-          <strong>College:</strong> ${college}
-        </p>
-
-        <p>
-          <strong>Level:</strong> ${level}
-        </p>
-
-        <p>
-          Tap the button below to open the African Studies past question.
-        </p>
-
-        <a <a href="https://drive.google.com/file/d/1hR5t5LXIj6X1WG8ckGt0iOy8YRgMIXG4/view" target="_blank">
-          class="pdf-button">
-          📄 Open African Studies Past Question
-        </a>
-
-      </div>
-
-    `;
-
-  } else {
-
-    document.getElementById("questions").innerHTML = `
-
-      <div class="question">
-
-        <h3>${course}</h3>
-
-        <p>
-          <strong>College:</strong> ${college}
-        </p>
-
-        <p>
-          <strong>Level:</strong> ${level}
-        </p>
-
-        <p>
-          Past questions for this course will be added soon.
-        </p>
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-</script>
+        result.innerHTML = `
+          <h2>${course}</h2>
+          <p>Past questions for this course will be added soon.</p>
+        `;
+      }
+    }
+  </script>
 
 </body>
 </html>
