@@ -1,40 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Past Questions - COE</title>
+  <title>College Past Questions</title>
 
   <style>
-
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
       background: #f2f6ff;
-      color: #222;
+      margin: 0;
+      padding: 0;
     }
 
     header {
-      background: #003b7a;
+      background: #003366;
       color: white;
       text-align: center;
-      padding: 30px 15px;
-    }
-
-    header h1 {
-      margin: 0;
+      padding: 20px;
     }
 
     .container {
       max-width: 700px;
-      margin: auto;
+      margin: 25px auto;
       padding: 20px;
     }
 
@@ -43,298 +32,150 @@
       padding: 20px;
       margin-bottom: 20px;
       border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
 
-    .details {
-      background: #eef5ff;
-      padding: 15px;
-      border-radius: 10px;
-      line-height: 1.8;
+    select, button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background: #003366;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0055aa;
+    }
+
+    #questionArea {
+      display: none;
     }
 
     .question {
-      border: 1px solid #ddd;
-      padding: 18px;
-      border-radius: 10px;
+      padding: 15px;
       margin-top: 15px;
-    }
-
-    .question h3 {
-      color: #003b7a;
-      margin-top: 0;
-    }
-
-    .download {
-      display: inline-block;
-      background: #003b7a;
-      color: white;
-      text-decoration: none;
-      padding: 13px 20px;
+      background: #eef4ff;
       border-radius: 8px;
-      font-weight: bold;
+    }
+
+    .answer {
       margin-top: 10px;
+      font-weight: bold;
     }
-
-    .download:hover {
-      background: #002752;
-    }
-
-    .warning {
-      background: #fff4d6;
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 15px;
-    }
-
-    .locked {
-      background: #ffe6e6;
-      padding: 15px;
-      border-radius: 10px;
-      color: #8a0000;
-    }
-
-    footer {
-      background: #003b7a;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-    }
-
   </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
-  <h1>📚 COE Past Questions</h1>
-
-  <p>Your selected past question</p>
-
+  <h1>College Past Questions</h1>
+  <p>Past Questions for Colleges of Education in Ghana</p>
 </header>
-
 
 <div class="container">
 
-
-  <!-- STUDENT SELECTION -->
-
   <div class="box">
 
-    <h2>Student Selection</h2>
+    <h2>Select Your Details</h2>
 
-    <div class="details">
+    <select id="college">
+      <option value="">Select College</option>
+      <option>Presbyterian College of Education</option>
+      <option>Komenda College of Education</option>
+      <option>Accra College of Education</option>
+      <option>OLA College of Education</option>
+      <option>Foso College of Education</option>
+      <option>Other College</option>
+    </select>
 
-      <strong>College:</strong>
-      <span id="college"></span>
+    <select id="level">
+      <option value="">Select Level</option>
+      <option>Level 100</option>
+      <option>Level 200</option>
+      <option>Level 300</option>
+      <option>Level 400</option>
+    </select>
 
-      <br>
+    <select id="course">
+      <option value="">Select Course</option>
+      <option>English Language</option>
+      <option>Mathematics</option>
+      <option>Science</option>
+      <option>Social Studies</option>
+      <option>ICT</option>
+      <option>Education</option>
+    </select>
 
-      <strong>Level:</strong>
-      <span id="level"></span>
-
-      <br>
-
-      <strong>Course:</strong>
-      <span id="course"></span>
-
-      <br>
-
-      <strong>Year:</strong>
-      <span id="year"></span>
-
-    </div>
-
-  </div>
-
-
-  <!-- PAYMENT CHECK -->
-
-  <div class="box" id="paymentBox">
-
-    <h2>🔐 Payment Status</h2>
-
-    <div id="paymentMessage"></div>
-
-  </div>
-
-
-  <!-- QUESTION -->
-
-  <div
-    class="box"
-    id="questionBox"
-    style="display:none;"
-  >
-
-    <h2>📄 Available Past Question</h2>
-
-    <div class="question">
-
-      <h3 id="questionTitle">
-        Past Question
-      </h3>
-
-      <p>
-
-        Your payment has been completed.
-
-        Your selected past question is ready.
-
-      </p>
-
-
-      <!--
-        REPLACE THE "#" BELOW WITH
-        THE LINK TO YOUR ACTUAL PDF
-      -->
-
-      <a
-        id="downloadButton"
-        class="download"
-        href="#"
-        target="_blank"
-      >
-
-        ⬇️ DOWNLOAD PAST QUESTION
-
-      </a>
-
-
-      <div class="warning">
-
-        📌 The download file will be connected
-        after you upload the actual past-question PDF.
-
-      </div>
-
-    </div>
+    <button onclick="loadQuestions()">
+      View Past Questions
+    </button>
 
   </div>
 
+  <div class="box" id="questionArea">
+
+    <h2>Past Questions</h2>
+
+    <div id="questions"></div>
+
+  </div>
 
 </div>
 
-
-<footer>
-
-  <p>© 2026 COE Past Questions</p>
-
-  <p>
-    Quality Past Questions for Every
-    College of Education Student
-  </p>
-
-</footer>
-
-
 <script>
 
+function loadQuestions() {
 
-  /*
-    GET STUDENT INFORMATION
-  */
+  const college = document.getElementById("college").value;
+  const level = document.getElementById("level").value;
+  const course = document.getElementById("course").value;
 
-  const college =
-    localStorage.getItem("college");
+  if (college === "" || level === "" || course === "") {
 
-  const level =
-    localStorage.getItem("level");
+    alert("Please select your College, Level and Course.");
 
-  const course =
-    localStorage.getItem("course");
-
-  const year =
-    localStorage.getItem("year");
-
-
-  /*
-    DISPLAY STUDENT INFORMATION
-  */
-
-  document.getElementById("college").textContent =
-    college || "Not selected";
-
-  document.getElementById("level").textContent =
-    level || "Not selected";
-
-  document.getElementById("course").textContent =
-    course || "Not selected";
-
-  document.getElementById("year").textContent =
-    year || "Not selected";
-
-
-  /*
-    QUESTION TITLE
-  */
-
-  document.getElementById("questionTitle").textContent =
-    (course || "Course") +
-    " - " +
-    (year || "Year") +
-    " Past Question";
-
-
-  /*
-    CHECK PAYMENT
-  */
-
-  const paymentSuccessful =
-    localStorage.getItem("paymentSuccessful");
-
-
-  if (paymentSuccessful === "true") {
-
-
-    document.getElementById(
-      "paymentMessage"
-    ).innerHTML =
-
-      "<div style='background:#e6f7e6;padding:15px;border-radius:10px;'>" +
-
-      "✅ <strong>Payment Successful</strong>" +
-
-      "<br><br>" +
-
-      "You can now access your selected past question." +
-
-      "</div>";
-
-
-    document.getElementById(
-      "questionBox"
-    ).style.display = "block";
-
-
-  } else {
-
-
-    document.getElementById(
-      "paymentMessage"
-    ).innerHTML =
-
-      "<div class='locked'>" +
-
-      "🔒 <strong>Past Question Locked</strong>" +
-
-      "<br><br>" +
-
-      "Please complete payment before accessing this question." +
-
-      "</div>";
-
+    return;
   }
 
+  document.getElementById("questionArea").style.display = "block";
+
+  document.getElementById("questions").innerHTML = `
+
+    <div class="question">
+
+      <h3>${course}</h3>
+
+      <p>
+        <strong>College:</strong> ${college}
+      </p>
+
+      <p>
+        <strong>Level:</strong> ${level}
+      </p>
+
+      <p>
+        Past questions for this course will be displayed here.
+      </p>
+
+      <p class="answer">
+        🔒 Payment will be required before accessing the full questions.
+      </p>
+
+    </div>
+
+  `;
+
+}
 
 </script>
 
-
 </body>
-
 </html>
