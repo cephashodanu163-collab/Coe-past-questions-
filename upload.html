@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Past Questions</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .box {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #0b5ed7;
+    }
+
+    input {
+      margin: 20px 0;
+      padding: 10px;
+      width: 90%;
+    }
+
+    button {
+      background: #0b5ed7;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h1>Upload Past Questions</h1>
+
+    <p>Select a PDF file to upload.</p>
+
+    <input type="file" id="pdfFile" accept=".pdf">
+
+    <br>
+
+    <button onclick="uploadPDF()">Upload PDF</button>
+
+    <p id="message"></p>
+  </div>
+
+  <script>
+    function uploadPDF() {
+      const file = document.getElementById("pdfFile").files[0];
+      const message = document.getElementById("message");
+
+      if (!file) {
+        message.innerHTML = "Please select a PDF first.";
+        message.style.color = "red";
+        return;
+      }
+
+      if (file.type !== "application/pdf") {
+        message.innerHTML = "Please select a PDF file.";
+        message.style.color = "red";
+        return;
+      }
+
+      message.innerHTML = "PDF selected successfully: " + file.name;
+      message.style.color = "green";
+    }
+  </script>
+
+</body>
+</html>
