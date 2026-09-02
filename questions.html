@@ -35,13 +35,15 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
 
-    select, button {
+    select,
+    button {
       width: 100%;
       padding: 14px;
       margin-top: 12px;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 16px;
+      box-sizing: border-box;
     }
 
     button {
@@ -49,10 +51,6 @@
       color: white;
       border: none;
       cursor: pointer;
-    }
-
-    button:hover {
-      background: #0055aa;
     }
 
     #questionArea {
@@ -66,9 +64,20 @@
       border-radius: 8px;
     }
 
-    .answer {
-      margin-top: 10px;
+    .pdf-button {
+      display: block;
+      text-align: center;
+      background: #003366;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      text-decoration: none;
       font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .pdf-button:hover {
+      background: #0055aa;
     }
   </style>
 </head>
@@ -106,6 +115,7 @@
 
     <select id="course">
       <option value="">Select Course</option>
+      <option>African Studies</option>
       <option>English Language</option>
       <option>Mathematics</option>
       <option>Science</option>
@@ -139,48 +149,68 @@ function loadQuestions() {
   const course = document.getElementById("course").value;
 
   if (college === "" || level === "" || course === "") {
-
     alert("Please select your College, Level and Course.");
-
     return;
   }
 
   document.getElementById("questionArea").style.display = "block";
 
-  document.getElementById("questions").innerHTML = `
+  if (course === "African Studies") {
 
-    <div class="question">
+    document.getElementById("questions").innerHTML = `
 
-      <h3>${course}</h3>
+      <div class="question">
 
-      <p>
-        <strong>College:</strong> ${college}
-      </p>
+        <h3>African Studies Past Question</h3>
 
-      <a href="https://drive.google.com/file/d/1hR5t5LXIj6X1WG8ckGt0iOy8YRgMIXG4/view?usp=drivesdk"
-   target="_blank"
-   style="display:block;
-          text-align:center;
-          background:#003366;
-          color:white;
-          padding:15px;
-          border-radius:8px;
-          text-decoration:none;
-          font-weight:bold;">
-  📄 
-</a>Open African Studies Past Question
+        <p>
+          <strong>College:</strong> ${college}
+        </p>
 
-      <p>
-        Past questions for this course will be displayed here.
-      </p>
+        <p>
+          <strong>Level:</strong> ${level}
+        </p>
 
-      <p class="answer">
-        🔒 Payment will be required before accessing the full questions.
-      </p>
+        <p>
+          Tap the button below to open the African Studies past question.
+        </p>
 
-    </div>
+        <a
+          href="https://drive.google.com/file/d/1hR5t5LXIj6X1WG8ckGt0iOy8YRgMIXG4/view?usp=drivesdk"
+          target="_blank"
+          class="pdf-button">
+          📄 Open African Studies Past Question
+        </a>
 
-  `;
+      </div>
+
+    `;
+
+  } else {
+
+    document.getElementById("questions").innerHTML = `
+
+      <div class="question">
+
+        <h3>${course}</h3>
+
+        <p>
+          <strong>College:</strong> ${college}
+        </p>
+
+        <p>
+          <strong>Level:</strong> ${level}
+        </p>
+
+        <p>
+          Past questions for this course will be added soon.
+        </p>
+
+      </div>
+
+    `;
+
+  }
 
 }
 
